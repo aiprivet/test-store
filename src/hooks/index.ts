@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import { CatalogItem } from "@/types";
 
 export function useCatalogFilters(catalog: CatalogItem[]) {
@@ -6,30 +6,31 @@ export function useCatalogFilters(catalog: CatalogItem[]) {
     const [rating, setRating] = useState<number | null>(null);
     const [price, setPrice] = useState<number | null>(null);
 
-    const handlePriceFilter = () => {
+    const handlePriceFilter = useCallback(() => {
         setPrice((prev) => (prev === 20 ? null : 20));
-    };
+    }, []);
 
-    const handleRatingFilter = () => {
+    const handleRatingFilter = useCallback(() => {
         setRating((prev) => (prev === 4 ? null : 4));
-    };
+    }, []);
 
-    const resetFilters = () => {
+    const resetFilters = useCallback(() => {
         setRating(null);
         setPrice(null);
-    };
+    }, []);
 
-    const filteredProducts = catalog.filter((product) => {
-        const matchesSearch = product.title.toLowerCase().includes(query.toLowerCase());
-        const matchesPrice = price ? product.price < price : true;
-        const matchesRating = rating ? product.rating.rate >= rating : true;
+    const filteredProducts = useMemo(() => {
+        return catalog.filter((product) => {
+            const matchesSearch = product.title.toLowerCase().includes(query.toLowerCase());
+            const matchesPrice = price ? product.price < price : true;
+            const matchesRating = rating ? product.rating.rate >= rating : true;
 
-        return matchesSearch && matchesPrice && matchesRating;
-    });
+            return matchesSearch && matchesPrice && matchesRating;
+        });
+    }, [catalog, query, price, rating]);
 
     return {
-        query,
-        setQuery,
+        queryState: { query, setQuery },
         rating,
         price,
         handlePriceFilter,

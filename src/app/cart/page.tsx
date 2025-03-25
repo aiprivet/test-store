@@ -1,5 +1,5 @@
-import CheckoutCard from "@/components/ui/CheckoutCard";
+import Checkout from "@/components/common/Checkout";
 
 export default function Cart() {
-    return <CheckoutCard />;
+    return <Checkout />;
 }

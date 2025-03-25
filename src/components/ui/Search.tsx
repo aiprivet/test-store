@@ -7,7 +7,7 @@ interface SearchProps {
 
 export default function Search({ query, setQuery }: SearchProps) {
     return (
-        <form className="w-lg">
+        <form className="w-lg" onSubmit={(e) => e.preventDefault()}>
             <label
                 htmlFor="default-search"
                 className="mb-2 text-sm font-medium text-neutral-900 sr-only dark:text-white"
