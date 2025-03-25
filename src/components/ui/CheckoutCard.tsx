@@ -1,13 +1,11 @@
-export default function CheckoutCard() {
+import Image from "next/image";
+
+export default function CheckoutCard({ imageUrl }: { imageUrl: string }) {
     return (
         <div className="rounded-lg border border-gray-200 bg-white p-4 shadow-sm dark:border-neutral-700 dark:bg-neutral-800 md:p-6">
             <div className="space-y-4 md:flex md:items-center md:justify-between md:gap-6 md:space-y-0">
                 <a className="shrink-0 md:order-1">
-                    <img
-                        className="h-20 w-20"
-                        src="https://flowbite.s3.amazonaws.com/blocks/e-commerce/imac-front.svg"
-                        alt="imac image"
-                    />
+                    <Image className="h-20 w-20" src={imageUrl} alt="" height={100} width={100} />
                 </a>
 
                 <label htmlFor="counter-input" className="sr-only">
@@ -76,9 +74,7 @@ export default function CheckoutCard() {
                 </div>
 
                 <div className="w-full min-w-0 flex-1 space-y-4 md:order-2 md:max-w-md">
-                    <a className="text-base font-medium text-neutral-900 hover:underline dark:text-white">
-                        Title
-                    </a>
+                    <a className="text-base font-medium text-neutral-900 hover:underline dark:text-white">Title</a>
 
                     <div className="flex items-center gap-4">
                         <button
