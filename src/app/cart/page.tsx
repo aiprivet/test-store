@@ -1,5 +1,5 @@
-import Checkout from "@/components/common/Cart";
+import Cart from "@/components/common/Cart";
 
-export default function Cart() {
-    return <Checkout />;
+export default function Page() {
+    return <Cart />;
 }
