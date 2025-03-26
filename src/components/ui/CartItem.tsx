@@ -1,11 +1,11 @@
-import { CatalogItem } from "@/types";
+import type { CartItem } from "@/types";
 import Image from "next/image";
 
-interface CheckoutCardProps extends CatalogItem {
+interface CartItemProps extends CartItem {
     handleRemoveClick: () => void;
 }
 
-export default function CheckoutCard({ title, price, image, handleRemoveClick }: CheckoutCardProps) {
+export default function CartItem({ title, price, image, handleRemoveClick }: CartItemProps) {
     return (
         <div className="rounded-lg border border-gray-200 bg-white p-4 shadow-sm dark:border-neutral-700 dark:bg-neutral-800 md:p-6">
             <div className="flex justify-between">

@@ -1,7 +1,7 @@
 import { useCallback, useMemo, useState } from "react";
-import { CatalogItem } from "@/types";
+import { CartItem } from "@/types";
 
-export function useCatalogFilters(catalog: CatalogItem[]) {
+export function useCatalogFilters(catalog: CartItem[]) {
     const [query, setQuery] = useState("");
     const [rating, setRating] = useState<number | null>(null);
     const [price, setPrice] = useState<number | null>(null);

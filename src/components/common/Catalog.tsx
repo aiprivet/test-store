@@ -1,16 +1,16 @@
 "use client";
-import { CatalogItem } from "@/types";
+import { CartItem } from "@/types";
 import Card from "@/components/ui/Card";
 import Search from "@/components/ui/Search";
 import Button from "@/components/ui/Button";
 import { useCatalogFilters } from "@/hooks";
-import useCheckoutStore from "@/store";
+import useCartStore from "@/store";
 
-export default function Catalog({ catalog }: { catalog: CatalogItem[] }) {
+export default function Catalog({ catalog }: { catalog: CartItem[] }) {
     const { queryState, handlePriceFilter, handleRatingFilter, resetFilters, filteredProducts, price, rating } =
         useCatalogFilters(catalog);
 
-    const { addToCheckout } = useCheckoutStore((state) => state);
+    const { addToCart } = useCartStore((state) => state);
 
     return (
         <div className="p-8">
@@ -46,7 +46,7 @@ export default function Catalog({ catalog }: { catalog: CatalogItem[] }) {
                             price={product.price}
                             imageUrl={product.image}
                             rating={product.rating.rate}
-                            handleAddToCartClick={() => addToCheckout(product)}
+                            handleAddToCartClick={() => addToCart(product)}
                         />
                     ))}
                 </div>

@@ -1,23 +1,23 @@
 import { create } from "zustand";
 
-import { CatalogItem } from "@/types";
+import { CartItem } from "@/types";
 
-interface CheckoutStore {
-    cartItems: CatalogItem[];
-    addToCheckout: (item: CatalogItem) => void;
-    removeFromCheckout: (id: string) => void;
+interface CartStore {
+    cartItems: CartItem[];
+    addToCart: (item: CartItem) => void;
+    removeFromCart: (id: string) => void;
 }
 
-const useCheckoutStore = create<CheckoutStore>((set) => ({
+const useCartStore = create<CartStore>((set) => ({
     cartItems: [],
-    addToCheckout: (item: CatalogItem) =>
+    addToCart: (item: CartItem) =>
         set((state) => ({
             cartItems: [...state.cartItems, item],
         })),
-    removeFromCheckout: (id: string) =>
+    removeFromCart: (id: string) =>
         set((state) => ({
             cartItems: state.cartItems.filter((item) => item.id !== id),
         })),
 }));
 
-export default useCheckoutStore;
+export default useCartStore;
