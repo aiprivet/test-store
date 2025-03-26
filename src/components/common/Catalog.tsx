@@ -5,12 +5,20 @@ import Search from "@/components/ui/Search";
 import Button from "@/components/ui/Button";
 import { useCatalogFilters } from "@/hooks";
 import useCartStore from "@/store";
+import { useCallback } from "react";
 
 export default function Catalog({ catalog }: { catalog: CartItem[] }) {
     const { queryState, handlePriceFilter, handleRatingFilter, resetFilters, filteredProducts, price, rating } =
         useCatalogFilters(catalog);
 
-    const { addToCart } = useCartStore((state) => state);
+    const { addToCart, cartItems } = useCartStore((state) => state);
+
+    const itemInCart = useCallback(
+        (itemId: string) => {
+            return cartItems.findIndex((item) => item.id === itemId) !== -1;
+        },
+        [cartItems]
+    );
 
     return (
         <div className="p-8">
@@ -28,7 +36,7 @@ export default function Catalog({ catalog }: { catalog: CartItem[] }) {
                     text="Reset filters"
                     onClick={resetFilters}
                     variant={price || rating ? "primary" : "secondary"}
-                    disabled={!!Boolean(price)}
+                    disabled={!!Boolean(price) || !!Boolean(rating)}
                 />
             </div>
 
@@ -47,6 +55,7 @@ export default function Catalog({ catalog }: { catalog: CartItem[] }) {
                             imageUrl={product.image}
                             rating={product.rating.rate}
                             handleAddToCartClick={() => addToCart(product)}
+                            addToCartDisabled={itemInCart(product.id)}
                         />
                     ))}
                 </div>
