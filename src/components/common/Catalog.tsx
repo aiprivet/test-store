@@ -36,7 +36,6 @@ export default function Catalog({ catalog }: { catalog: CartItem[] }) {
                     text="Reset filters"
                     onClick={resetFilters}
                     variant={price || rating ? "primary" : "secondary"}
-                    disabled={!!Boolean(price) || !!Boolean(rating)}
                 />
             </div>
 
